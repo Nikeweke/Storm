@@ -4,6 +4,7 @@
 * Install 
 * Quick start
 * Use external packages
+* Import and cycle error
 --- 
 
 ### Install
@@ -72,3 +73,7 @@ go run main.go
 
 pause
 ```
+
+### Import and cycle error
+Импорты могут замыкаться. Допустим: `main -> config -> controllers -> config`. Нельзя юзать предыдущее пространство. Надо идти дальше. Вот так: `main -> config -> controllers -> config/structs`
+

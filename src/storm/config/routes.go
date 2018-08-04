@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+
 var ApiCtrl   controllers.ApiController
 var IndexCtrl controllers.IndexController
 
@@ -22,8 +23,7 @@ func Routes() *mux.Router {
 	api.HandleFunc("/", ApiCtrl.APICheck)
 
 	// public 
-	// router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
+	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
 
 	// Show all register routes (in app/helpers/routes)
 	// err := router.Walk(helpers.GetRoutes)

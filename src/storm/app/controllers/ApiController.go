@@ -4,16 +4,11 @@ import (
   // "fmt"
   "net/http"
   "encoding/json"
+  "storm/config/structs"
 );
 
-type ApiController struct {
-}
-
-type ResponseMessage struct {
-	Success int    `json:"success"`
-	Message string `json:"message"`
-}
-
+type ApiController struct {}
+type ResponseMessage structs.ResponseMessage
 
 // APICheck - checl if api works
 func (this ApiController) APICheck(res http.ResponseWriter, req *http.Request) {
