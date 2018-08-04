@@ -2,12 +2,12 @@ package config
 
 import (
 	"net/http"
-   	color "github.com/fatih/color"
+	 color "github.com/fatih/color"
+	"github.com/gorilla/mux"
 );
 
-func Server() {
-    	// START SERVER
-	var port string = "8000";
+func Server(router *mux.Router) {
+	port := "8000";
 	color.Yellow("App is running on port: " + port)
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":" + port, router)
 }
