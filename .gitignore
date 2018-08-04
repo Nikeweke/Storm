@@ -1,4 +1,5 @@
 bin/
 pkg/
-src/
+src/*
+!src/storm
 tmp/
