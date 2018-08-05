@@ -6,14 +6,29 @@
     <title>{{ .title }}</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">  <!-- Bulma -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">   Bulma cdn -->
+    <link rel="stylesheet" href="/public/css/bulma.css">  <!-- Bulma cdn -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">    <!-- Ionicons -->
     <script src="https://unpkg.com/vue@2.5.2/dist/vue.js" charset="utf-8"></script> <!-- VUE --> 
 
      <style media="screen">
           section.hero{
-            background-image: -webkit-linear-gradient(45deg, #00a8c5, #ffff7e);
-            background-image: linear-gradient(45deg, #00a8c5, #ffff7e);
+            background-image: -webkit-linear-gradient(45deg, #45145a, #ff5300);
+            background-image: linear-gradient(45deg, #45145a, #ff5300);
+          }
+         
+          section.hero h2 {
+            color:#fff7e0;
+            margin-top:10px;
+          }
+
+          section.hero h2 img {
+            border-radius: 95%;
+            box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+          }
+
+          section.hero h3 {
+            color:#fff7e0;
           }
 
           blockquote {
@@ -32,10 +47,10 @@
       <div class="hero-body"  style="padding:0px;">
         <div class="container">
           <h2 class="title is-2 has-text-centered">
-             <img width="200" src="/assets/bull-silhouette.svg" />{{ greeting }}
+             <img width="200" src="public/assets/storm.png" />{{ .greeting }}
           </h2>
           <h3 class="title is-5 has-text-centered">
-            {{ words }}
+            {{ .words }}
           </h3><br />
 
         </div>
@@ -45,7 +60,7 @@
     <div class="container"><br />
       <form method="POST" action="/test">
             <div class="field">
-              <label class="label">Test POST form (Body-parser)</label>
+              <label class="label">Example POST form </label>
               <div class="control">
                 <input class="input" name="test_field" type="text" placeholder="Enter text">
               </div>
@@ -56,7 +71,28 @@
 
       <br /><br />
 
-      <div class="field">
+      <div>
+
+        <label class="label">Example of loop data</label>
+        <ul>
+          {{ range .items }}
+            <li>{{ . }}</li>
+          {{ end }}  
+        </ul>
+
+        <!-- {{range .users}}
+            <tr>
+              <td>{{.Id}}</td>
+              <td>{{.Email}}</td>
+              <td>{{.Name}}</td>
+              <td>{{.Password}}</td>
+              <td style="width:10px;"><a class="btn btn-danger" href="/delete?id={{.Id}}">Delete it</a></td>
+          </tr>
+       {{end}} -->
+
+      </div>
+
+      <!-- <div class="field">
         <label class="label">Test Sockets</label>
         <blockquote>Be sure that you enable in <b>config.json</b> - <b>sockets.enabled: true</b> & <b>npm i socket.io -S</b></blockquote>
         <div class="control">
@@ -65,8 +101,9 @@
         <p class="help">Type "hello" and receive answer from sockets</p>
       </div>
 
-       <button onclick="SendToSockets();" class="button is-light">Send &nbsp;<i class="ion-paper-airplane"></i></button>
-    </div>
+       <button onclick="SendToSockets();" class="button is-light">Send &nbsp;<i class="ion-paper-airplane"></i></button> -->
+    
+      </div>
 
   </body>
 </html>

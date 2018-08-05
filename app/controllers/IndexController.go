@@ -3,27 +3,28 @@ package controllers
 import (
   "fmt"
 	"net/http"
-	"storm/app/helpers"
-	"storm/config/structs"
+	// "../helpers"
+	// "../../config/structs"
 );
 
 type IndexController struct {}
-type StringArray structs.StringArray
-
-var Template helpers.Template
-
 
 // Index - Home page
 func (this IndexController) Index(res http.ResponseWriter, req *http.Request) {
-	data := StringArray{"title": "Главная страница"}	
-	
-  fmt.Println(data)
 
-  // Template.Render("home", data, res)
-	// fmt.Fprintf(res, "Hello its Index")
+	items := [...]string{"item1", "item2", "item3"}
+	
+	data := StringArray{
+		 "title":    "Storm is greeting you!",
+		 "greeting": "Storm",
+		 "words":    "Fast and reliable",
+		 "items": items,
+	}	
+
+  render("home", data, res)
 }
 
-// CheckRequest - Checking request
+// CheckRequest
 func (this IndexController) CheckRequest(res http.ResponseWriter, req *http.Request) {
 	fmt.Fprintf(res, "Its Cehck requests")
 }

@@ -4,6 +4,7 @@
 * Install 
 * Quick start
 * Use external packages
+* Вопросы и Ответы
 * Import and cycle error
 --- 
 
@@ -74,6 +75,10 @@ go run main.go
 pause
 ```
 
-### Import and cycle error
-Импорты могут замыкаться. Допустим: `main -> config -> controllers -> config`. Нельзя юзать предыдущее пространство. Надо идти дальше. Вот так: `main -> config -> controllers -> config/structs`
+### Вопросы и Ответы
 
+**1)** Import cycle error?
+>Импорты могут замыкаться. Допустим: `main -> config -> controllers -> config`. Нельзя юзать предыдущее пространство. Надо идти дальше. Вот так: `main -> config -> controllers -> config/structs`
+
+**2)** Где ищет `import` пакеты стандартно?
+> В папке `src`. Если вы пишите: `import "storm/config"`, это значит: `./src/storm/config`

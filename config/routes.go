@@ -1,9 +1,9 @@
 package config 
 
 import (
-	"github.com/gorilla/mux"
-	"storm/app/controllers"
-	"net/http"
+  "github.com/gorilla/mux"
+  "net/http"
+  "../app/controllers"
 )
 
 
