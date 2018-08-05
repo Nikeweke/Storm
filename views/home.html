@@ -80,16 +80,14 @@
           {{ end }}  
         </ul>
 
-        <!-- {{range .users}}
-            <tr>
-              <td>{{.Id}}</td>
-              <td>{{.Email}}</td>
-              <td>{{.Name}}</td>
-              <td>{{.Password}}</td>
-              <td style="width:10px;"><a class="btn btn-danger" href="/delete?id={{.Id}}">Delete it</a></td>
-          </tr>
-       {{end}} -->
+        <br />
 
+        <label class="label">Example of loop data (Nested)</label>
+        <ul>
+          {{ range .items2 }}
+            <li>{{ .id }}) <b>{{ .name }}</b></li>
+          {{ end }}  
+        </ul>
       </div>
 
       <!-- <div class="field">

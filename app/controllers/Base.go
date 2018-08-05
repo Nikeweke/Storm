@@ -19,7 +19,7 @@ type ResponseMessage structs.ResponseMessage
 |  Render page
 |--------------------------------------------------------------------------
 */
-func render(page string, data StringArray, res http.ResponseWriter) {
+func render(page string, viewArgs StringArray, res http.ResponseWriter) {
 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
 
 	// head      :=  path.Join("views/partials", "head.html")
@@ -33,7 +33,7 @@ func render(page string, data StringArray, res http.ResponseWriter) {
 	// }
 
 	// parsedPages.ExecuteTemplate(res, page, data)
-	parsedPages.Execute(res, data) 
+	parsedPages.Execute(res, viewArgs) 
 }
 
 
