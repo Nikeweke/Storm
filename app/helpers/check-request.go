@@ -10,13 +10,12 @@ import (
 type StringArray structs.StringArray
 
 func CheckRequest(req *http.Request) StringArray {
-
 	var contentType string = req.Header.Get("Content-type")
 	var body interface{}
 
 	if contentType == "application/x-www-form-urlencoded" {
-		req.ParseForm()
-		body = req.PostForm
+	  req.ParseForm()
+	  body = req.PostForm
 	// req.Form - has and body and query together
 	// req.Form.Get("someKey")
 	// req.FormValue("someKey")
@@ -24,8 +23,8 @@ func CheckRequest(req *http.Request) StringArray {
 	} else if contentType == "application/json" {
 	  body = &StringArray{}
 	  if err := json.NewDecoder(req.Body).Decode(body); err != nil {
-			fmt.Println("Error decoding body: %s", err)
-			return
+		fmt.Printf("Error decoding body: %s", err)
+		return StringArray{}
 	  }
 	  // body.someKey
 	} 
