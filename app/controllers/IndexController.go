@@ -3,8 +3,8 @@ package controllers
 import (
   "fmt"
 	"net/http"
-	// "../helpers"
-	// "../../config/structs"
+	"encoding/json"
+	"../helpers"
 );
 
 type IndexController struct {}
@@ -33,12 +33,13 @@ func (this IndexController) Index(res http.ResponseWriter, req *http.Request) {
 		 "items2": itemsNested,
 	}	
 
-  render("home", viewArgs, res)
+  Render("home", viewArgs, res)
 }
 
 /**
 * Check Request
 */
 func (this IndexController) CheckRequest(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(res, "Its Cehck requests")
+	requestInfo := helpers.CheckRequest(req)
+  Send(requestInfo, res)
 }

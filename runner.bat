@@ -11,7 +11,7 @@ REM SET GOARCH=amd64
 REM SET CGO_ENABLED=0
 
 REM fresh
-REM go run main.go
+go run main.go
 
-go build main.go
+REM go build main.go
 REM pause

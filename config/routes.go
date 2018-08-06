@@ -3,35 +3,25 @@ package config
 import (
   "github.com/gorilla/mux"
   "net/http"
-  "../app/controllers"
+  "../routes"
 )
 
-
-var ApiCtrl   controllers.ApiController
-var IndexCtrl controllers.IndexController
-
 func Routes() *mux.Router {
+  router := mux.NewRouter()
   
-	router := mux.NewRouter()
+  router = routes.Web(router)
+  router = routes.Api(router)
 
-	// web
-	router.HandleFunc("/",      IndexCtrl.Index).Methods("GET")
-	router.HandleFunc("/check", IndexCtrl.CheckRequest)
+  // public 
+  router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
 
-	// api
-	api := router.PathPrefix("/api").Subrouter()
-	api.HandleFunc("/", ApiCtrl.APICheck)
+  // Show all register routes (in app/helpers/routes)
+  // err := router.Walk(helpers.GetRoutes)
+  // if err != nil {
+  // 	fmt.Println(err)
+  // }
 
-	// public 
-	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
-
-	// Show all register routes (in app/helpers/routes)
-	// err := router.Walk(helpers.GetRoutes)
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-
-	return router
+  return router
 }
 
 

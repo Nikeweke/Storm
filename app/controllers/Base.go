@@ -19,7 +19,7 @@ type ResponseMessage structs.ResponseMessage
 |  Render page
 |--------------------------------------------------------------------------
 */
-func render(page string, viewArgs StringArray, res http.ResponseWriter) {
+func Render(page string, viewArgs StringArray, res http.ResponseWriter) {
 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
 
 	// head      :=  path.Join("views/partials", "head.html")
@@ -42,7 +42,7 @@ func render(page string, viewArgs StringArray, res http.ResponseWriter) {
 |  Send Json response
 |--------------------------------------------------------------------------
 */
-func send(message interface{}, res http.ResponseWriter) {
+func Send(message interface{}, res http.ResponseWriter) {
   json, _ := json.Marshal(message)
   res.Header().Set("Content-Type", "application/json")
   res.Write(json)
@@ -54,6 +54,6 @@ func send(message interface{}, res http.ResponseWriter) {
 |  Redirect
 |--------------------------------------------------------------------------
 */
-func redirect(path string, res http.ResponseWriter, req *http.Request) {
+func Redirect(path string, res http.ResponseWriter, req *http.Request) {
   http.Redirect(res, req, "/", 301)
 }
