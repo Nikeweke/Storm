@@ -2,16 +2,19 @@ package controllers
 
 import (
   "net/http"
+  "github.com/labstack/echo"
 );
 
 type ApiController struct {}
 
 /**
-* APICheck - check if api works
+* CheckApi - check if api works
 */
-func (this ApiController) APICheck(res http.ResponseWriter, req *http.Request) {
-  resMsg  := ResponseMessage{1, "That is API, Hello from Storm!"}
-  // OR
-  // resMsg  := StringArray{ "success": 1, "message": "That is API, Hello from Storm!" } 
-  Send(resMsg, res)
+func (this ApiController) CheckApi(c echo.Context) error {
+  type StringArray map[string]interface{}
+  var message = StringArray{
+    "success": 1,
+    "message": "Hello this is Storm gretting you!",
+  }
+  return c.JSON(http.StatusOK, message)
 }

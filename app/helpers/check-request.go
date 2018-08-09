@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"encoding/json"
-	"../../config/structs"
 );
   
-type StringArray structs.StringArray
-
 func CheckRequest(req *http.Request) StringArray {
 	var contentType string = req.Header.Get("Content-type")
 	var body interface{}

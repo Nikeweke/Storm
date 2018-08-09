@@ -6,24 +6,17 @@
 package routes
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo"
 	"../app/controllers"
-	"./middlewares"
+	// "./middlewares"
 )
 
 var IndexCtrl controllers.IndexController
 
-func Web(router *mux.Router) *mux.Router {
+func Web(router *echo.Echo) {
 
-	// home 
-	router.HandleFunc("/", IndexCtrl.Index).Methods("GET")
+	router.GET("/",      IndexCtrl.Index)
+	router.Any("/check", IndexCtrl.CheckRequest)
 
-    // check request - gives info about request
-	router.HandleFunc("/check", IndexCtrl.CheckRequest)
-
-	// test middleware
-	router.Use(middlewares.CheckRequest)
-
-	return router
 }
 

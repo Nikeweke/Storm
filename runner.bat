@@ -10,7 +10,7 @@ REM SET GOOS=linux
 REM SET GOARCH=amd64
 REM SET CGO_ENABLED=0
 
-REM fresh
+fresh
 go run main.go
 
 REM go build main.go

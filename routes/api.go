@@ -6,17 +6,16 @@
 package routes
 
 import (
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo"
 	"../app/controllers"
 )
 
 var ApiCtrl controllers.ApiController
 
-func Api(router *mux.Router) *mux.Router {
-	api := router.PathPrefix("/api").Subrouter()
+// api/...
+func Api(router *echo.Echo) {
+	api := router.Group("/api")
 
-	// greeting from api
-	api.HandleFunc("/", ApiCtrl.APICheck)
+	api.GET("", ApiCtrl.CheckApi)   
 
-	return router
 }

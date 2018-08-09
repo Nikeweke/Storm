@@ -1,17 +1,12 @@
-package controllers
+package helpers
 
 import (
     "html/template"
     "net/http"
 	"path"
 	// "fmt"
-	"../../config/structs"
     "encoding/json"
 )
-
-// Иниц. все структуры используемые в пространстве "controllers"
-type StringArray structs.StringArray
-type ResponseMessage structs.ResponseMessage
 
 
 /*
@@ -19,7 +14,7 @@ type ResponseMessage structs.ResponseMessage
 |  Render page
 |--------------------------------------------------------------------------
 */
-func Render(page string, viewArgs StringArray, res http.ResponseWriter) {
+func Render(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
 
 	// head      :=  path.Join("views/partials", "head.html")
@@ -33,8 +28,9 @@ func Render(page string, viewArgs StringArray, res http.ResponseWriter) {
 	// }
 
 	// parsedPages.ExecuteTemplate(res, page, data)
-	parsedPages.Execute(res, viewArgs) 
+	return parsedPages.Execute(res, viewArgs) 
 }
+
 
 
 /*

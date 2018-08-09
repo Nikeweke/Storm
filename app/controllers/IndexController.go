@@ -1,18 +1,20 @@
 package controllers
 
 import (
-  // "fmt"
 	"net/http"
-	// "encoding/json"
+	"github.com/labstack/echo"
 	"../helpers"
 );
 
 type IndexController struct {}
 
+
 /**
 * Index - Home page
 */
-func (this IndexController) Index(res http.ResponseWriter, req *http.Request) {
+func (this IndexController) Index(c echo.Context) error {
+	type StringArray helpers.StringArray
+
 	items := [...]string{
 		"item1", 
 		"item2", 
@@ -33,13 +35,20 @@ func (this IndexController) Index(res http.ResponseWriter, req *http.Request) {
 		 "items2": itemsNested,
 	}	
 
-  Render("home", viewArgs, res)
+  return helpers.Render("home", viewArgs, c.Response())
 }
 
 /**
 * Check Request
 */
-func (this IndexController) CheckRequest(res http.ResponseWriter, req *http.Request) {
-	requestInfo := helpers.CheckRequest(req)
-  Send(requestInfo, res)
+func (this IndexController) CheckRequest(c echo.Context) error {
+  var req *http.Request = c.Request()
+  message := helpers.CheckRequest(req)
+  return c.JSON(200, message)
 }
+
+
+
+
+
+

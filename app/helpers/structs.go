@@ -1,4 +1,4 @@
-package structs 
+package helpers 
 
 type ResponseMessage struct {
 	Success int    `json:"success"`
