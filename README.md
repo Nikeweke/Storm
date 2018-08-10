@@ -11,7 +11,7 @@ Fast and reliable app to make problem runs
 ---
 
 ### Quick start
-###### windows
+###### windows (runner.bat)
 ```batch
 @ECHO OFF
 SETLOCAL
@@ -25,7 +25,7 @@ go get -u github.com/labstack/echo
 go run main.go
 ```
 
-###### linux
+###### linux (runner.sh)
 ```bash
 export GOPATH=$(pwd)
 export PATH=$PATH:$GOPATH/bin
