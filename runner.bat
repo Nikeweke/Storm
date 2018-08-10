@@ -10,6 +10,9 @@ REM SET GOOS=linux
 REM SET GOARCH=amd64
 REM SET CGO_ENABLED=0
 
+REM go get -u github.com/labstack/echo
+REM go get github.com/pilu/fresh
+
 fresh
 go run main.go
 

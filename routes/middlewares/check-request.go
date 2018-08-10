@@ -1,20 +1,20 @@
 package middlewares
 
 import (
-	"net/http"
+	"github.com/labstack/echo"
+	// "net/http"
 	// "encoding/json"
-	"../../config/structs"
 	"fmt"
 	"log"
 	"../../app/helpers"
 )
 
-type StringArray structs.StringArray
+type StringArray helpers.StringArray
 
-func CheckRequest(next http.Handler) http.Handler {
-  return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+func CheckRequest(next echo.HandlerFunc) echo.HandlerFunc  {
+  return func(c echo.Context) error {
 	
-    checkedRequest := helpers.CheckRequest(req)
+    checkedRequest := helpers.CheckRequest(c.Request())
 		
 		log.Println("------------------------------> Check Request")
 		fmt.Println("Method =",       checkedRequest["Method"])
@@ -22,6 +22,8 @@ func CheckRequest(next http.Handler) http.Handler {
 		fmt.Println("Query =",        checkedRequest["Query"])
 		fmt.Println("Content-Type =", checkedRequest["Content-Type"])
 
-	  next.ServeHTTP(res, req)
-  })
+	  return next(c)
+  }
 }
+
+
