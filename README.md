@@ -1,5 +1,5 @@
 ## Storm - brother of Bullz
-Fast and reliable app to make problem runs
+Fast and reliable app to make problem runs. Using `echo` framework for HTTP handling
 
 <p align="center" style="text-align:center;">
   <img src="https://github.com/Nikeweke/Storm/blob/master/public/assets/storm.png?raw=true" width="300" />
