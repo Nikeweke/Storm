@@ -1,6 +1,6 @@
 package main
 
-import "./config";
+import "./config"
 
 func main () {
   config.Bootstrap()
