@@ -8,7 +8,8 @@ package routes
 import (
 	"github.com/labstack/echo"
 	"../app/controllers"
-	"./middlewares"
+	// "./middlewares"
+	"github.com/labstack/echo/middleware"
 )
 
 var ApiCtrl controllers.ApiController
@@ -17,8 +18,18 @@ var ApiCtrl controllers.ApiController
 func Api(router *echo.Echo) {
 	api := router.Group("/api")
 
-	api.Use(middlewares.CheckRequest)
+	// using middleware for this group (custom)
+	// api.Use(middlewares.CheckRequest)
 
-	api.GET("", ApiCtrl.CheckApi)   
+	// Using middleware from Echo library (needs install jwt-go package)
+	// api.Use(middleware.Logger())
+
+	// Using middleware logger formatted
+	api.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+	  Format: "{${method}} \"${uri}\" (status=${status})\n",
+	}))
+
+
+	api.Any("", ApiCtrl.CheckApi)   
 
 }
