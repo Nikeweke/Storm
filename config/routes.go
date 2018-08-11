@@ -17,14 +17,6 @@ func Routes() *echo.Echo {
   // public 
   router.Static("/public", "public")
 
-
-  // get Routes
-//   data, err := json.MarshalIndent(e.Routes(), "", "  ")
-// if err != nil {
-// 	return err
-// }
-// ioutil.WriteFile("routes.json", data, 0644)
-
   return router
 }
 

@@ -3,75 +3,66 @@ package config
 import (
 	"github.com/labstack/echo"
 	color "github.com/fatih/color"
-	"log"
 	"fmt"
 	"os"
-  // "../app/helpers"
-  // "reflect"
+	"time"
+	"../app/helpers"
 )
 
-type MapNested map[string]map[string]string
-type Map map[string]string
-
-var MODES = MapNested{
-	"dev":    Map{ "name": "dev",   "port": "8000",  "color": "yellow",  },
-	"test":   Map{ "name": "test",  "port": "3000",  "color": "magenta", },
-	"prod":   Map{ "name": "prod",  "port": "80",    "color": "green",   },
-	"routes": Map{ "name": "routes" },
+type Mode struct {
+	Name string 
+	Port string 
+	Color color.Attribute 
 }
 
-func Server(router *echo.Echo) {
+var MODES = map[string]Mode{
+	"dev":    Mode{ "dev",  "8000",  color.FgYellow,  },
+	"test":   Mode{ "test", "3000",  color.FgMagenta, },
+	"prod":   Mode{ "prod", "80",    color.FgGreen,   },
+	"routes": Mode{ "routes", "",    color.FgBlack     },
+}
 
+/**
+* Start server and out info 
+*/
+func Server(router *echo.Echo) {
 	router.HidePort = true   // disable echo http serve info
 	router.HideBanner = true // disable echo banner in console
 
-	consoleArgs := os.Args // []string
-  modeArg     := consoleArgs[1]
-	var mode Map
-  
-  if modeArg == "dev" || modeArg == "prod" || modeArg == "test" {
-    mode = MODES[modeArg]
-  } else {
-    mode = MODES["dev"]
-  }
+	var mode Mode
+  consoleArgs := os.Args // []string
+	
+	if len(consoleArgs) > 1 {
+		mode = MODES[consoleArgs[1]]
+	} else {
+		mode = MODES["dev"]
+	}
 
-  startServerColorInfo(mode)
-	router.Start(":8000")
+	// output routes and exit 
+	if mode.Name == "routes" {
+		helpers.ShowRoutes(router)
+		os.Exit(1)
+	}
+
+  outLaunchInfo(mode)
+	router.Start(":" + mode.Port)
 }
 
-func startServerColorInfo(mode Map) {
-	c := color.New(color.FgCyan).Add(color.Underline)
-	log.Print("")
-	c.Print("App ")
+
+/**
+*  Output colorized string about server starting 
+*/
+func outLaunchInfo(mode Mode) {
+	c := color.New(mode.Color).Add(color.Bold)
+	current_time := time.Now().Local().Format("15:04:05 01/02/2006")
+	
+	c.Print("[" + current_time + "] App ")
 	fmt.Print("is running on port: ")
-	c.Print(mode["port"] + " ")
+	c.Print(mode.Port + " ")
 	fmt.Print("(");
-	c.Print(mode["name"] + " ") 
+	c.Print(mode.Name + " ") 
 	fmt.Print("mode)")
 }
 
 
-// что такое process.argv[...] ?
-  // это просто параметры которые можно ловить с консоли - node  app  <modeName>
-  //                                                        [0]   [1]  [2]
-//   let modeName = process.argv[2]
 
-//   // если просмотр маршрутов
-//   if (modeName === 'routes') {
-//     console.log( getRoutes(app) )    
-//     process.exit(1)
-//   }
-
-//   // определяем порт (по ум. - 8000). 
-//   let mode = modeName ? MODES[modeName] : MODES.dev 
-
-//   // запуск сервера
-//   app.listen(mode.port, () => {
-//     let coloredMsg = []
-//     for (let key of Object.keys(mode)) {
-//       coloredMsg.push(colors.bold[mode.color](mode[key]))
-//     }
-//     coloredMsg[2] = colors.bold[mode.color]('App')
-
-//     util.log(`${coloredMsg[2]} is running on port: ${coloredMsg[1]} (${coloredMsg[0]} mode)`)
-// })

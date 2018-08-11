@@ -17,7 +17,7 @@ REM go get github.com/dgrijalva/jwt-go
 REM go get github.com/fatih/color
 
 REM fresh
-go run main.go dev
+go run main.go routes
 
 REM go build main.go prod
 REM pause

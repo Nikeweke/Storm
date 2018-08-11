@@ -6,3 +6,4 @@ type ResponseMessage struct {
 }
 
 type StringArray map[string]interface{}
+

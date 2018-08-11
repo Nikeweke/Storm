@@ -7,12 +7,14 @@ Fast and reliable app to make problem runs. Using `echo` framework for HTTP hand
 
 #### Содержание 
 * Quick start
+* Commands
 * Schema of launch
 * Useful packages
 
 ---
 
 ### Quick start
+Just copy and execute file
 ###### windows (runner.bat)
 ```bat
 @ECHO OFF
@@ -41,6 +43,12 @@ go get -u github.com/labstack/echo
 
 go run main.go
 ```
+
+### Commands
+* **main dev** - start `dev` mode - 8000 port
+* **main prod** - start `prod` mode - 80 port
+* **main test** - start `test` mode - 3000 port
+* **main routes** - output in console registered routes
 
 ### Schema of launch
 <p align="center" style="text-align:center;">
