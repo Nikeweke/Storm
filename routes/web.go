@@ -15,8 +15,9 @@ var IndexCtrl controllers.IndexController
 
 func Web(router *echo.Echo) {
 
-	router.GET("/",      IndexCtrl.Index)
-	router.Any("/check", IndexCtrl.CheckRequest)
+	router.POST("/",      IndexCtrl.Index)
+	router.DELETE("/check", IndexCtrl.CheckRequest)
+	router.PUT("/check2", IndexCtrl.CheckRequest)
 
 }
 
