@@ -22,6 +22,7 @@ var MODES = map[string]Mode{
 	"routes": Mode{ "routes", "",    color.FgBlack     },
 }
 
+
 /**
 * Start server and out info 
 */

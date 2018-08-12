@@ -58,8 +58,10 @@ func ShowRoutes(router *echo.Echo) {
     } 
   }
 
-  // fmt.Println("Length ==", len(outputRoutes))
+  // make file routes.json 
   writeRoutesIntoFile(outputRoutes)
+
+  // output routes in console
   for _, route := range outputRoutes {
     // fmt.Println(route)
     color := getColorForMethod(route.Method)
