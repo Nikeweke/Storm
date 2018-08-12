@@ -16,8 +16,12 @@ REM go get -u github.com/labstack/echo
 REM go get github.com/dgrijalva/jwt-go
 REM go get github.com/fatih/color
 
+REM go get github.com/jinzhu/gorm
+REM go get github.com/jinzhu/gorm/dialects/mysql
+REM go get github.com/jinzhu/gorm/dialects/sqlite
+
 REM fresh
-go run main.go routes
+go run main.go
 
 REM go build main.go prod
 REM pause

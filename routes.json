@@ -1,13 +1,18 @@
 [
   {
     "method": "FEW",
+    "path": "/api/*",
+    "name": "github.com/labstack/echo.(*Group).Use.func1"
+  },
+  {
+    "method": "FEW",
     "path": "/api",
     "name": "_/D_/CODING/PROJECTS/Storm/app/controllers.(ApiController).CheckApi-fm"
   },
   {
     "method": "FEW",
-    "path": "/api/*",
-    "name": "github.com/labstack/echo.(*Group).Use.func1"
+    "path": "/check",
+    "name": "_/D_/CODING/PROJECTS/Storm/app/controllers.(IndexController).CheckRequest-fm"
   },
   {
     "method": "GET",
@@ -15,22 +20,12 @@
     "name": "github.com/labstack/echo.static.func1"
   },
   {
-    "method": "DELETE",
-    "path": "/check",
-    "name": "_/D_/CODING/PROJECTS/Storm/app/controllers.(IndexController).CheckRequest-fm"
-  },
-  {
-    "method": "PUT",
-    "path": "/check2",
-    "name": "_/D_/CODING/PROJECTS/Storm/app/controllers.(IndexController).CheckRequest-fm"
-  },
-  {
     "method": "GET",
     "path": "/public/*",
     "name": "github.com/labstack/echo.static.func1"
   },
   {
-    "method": "POST",
+    "method": "GET",
     "path": "/",
     "name": "_/D_/CODING/PROJECTS/Storm/app/controllers.(IndexController).Index-fm"
   }
