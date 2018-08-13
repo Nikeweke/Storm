@@ -10,7 +10,6 @@
  
     "databases": {
         "mysql": {
-           "enabled": true, 
            "host": "localhost",
            "user": "root",
            "password": "",
@@ -18,13 +17,27 @@
          },
  
          "sqlite": {
-           "enabled": true,
-           "db_name": "./db.sqlite"
+           "db_address": "./test.sqlite"
          },
          
          "mongodb": {
-           "enabled": true,
-           "db_name": "mongodb://admin:123gg32qq@ds245971.mlab.com:45971/sweet-booker"
-         } 
+           "db_address": "mongodb://admin:12345@localhost:27015"
+         },
+         
+         "postgres": {
+          "host": "localhost",
+          "user": "root",
+          "password": "",
+          "db_name": "test",
+          "port" : "5432" 
+        },
+
+        "mssql": {
+          "host": "localhost",
+          "user": "root",
+          "password": "",
+          "db_name": "test",
+          "port": "1433"
+        }
     }
  }

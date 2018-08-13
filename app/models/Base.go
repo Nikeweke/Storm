@@ -2,9 +2,9 @@ package models
 
 import (
 	color "github.com/fatih/color"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	// "github.com/jinzhu/gorm"
+	// _ "github.com/jinzhu/gorm/dialects/mysql"
+	// _ "github.com/jinzhu/gorm/dialects/sqlite"
 	//  _ "github.com/jinzhu/gorm/dialects/postgres"
 	//  _ "github.com/jinzhu/gorm/dialects/mssql"
 
@@ -14,62 +14,75 @@ import (
 	"os"
 )
 
+// MONGO
+// func Mongo() {
+// }
 
-func Mysql() {
+// MYSQL
+func Mysql() *gorm.DB {
 	dbConfig := getDatabaseConfig("mysql")
 	user     := dbConfig["user"]
 	password := dbConfig["password"]
 	dbname   := dbConfig["db_name"]
-	enabled  := dbConfig["enabled"].(bool)
 
-	if enabled {
-		dbString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local", user, password, dbname)
+	dbString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local", user, password, dbname)
 
-		db, err := gorm.Open("mysql", dbString)
-		if err != nil {
-			color.Red("ERROR ====================> ")
-			fmt.Println(err)
-			color.Red("ERROR ====================> ")
-		}
-		defer db.Close()
+	db, err := gorm.Open("mysql", dbString)
+	if err != nil {
+	  errorHandler(err)
 	}
+	return db
+}
+
+// SQLITE
+func Sqlite() *gorm.DB {
+	dbConfig := getDatabaseConfig("sqlite")
+	dbString := dbConfig["db_address"]
+	
+	db, err := gorm.Open("sqlite3", dbString)
+	if err != nil {
+	  errorHandler(err)
+	}
+  return db 
 }
 
 
+// POSTGRES
+func Postgres() {
+	dbConfig := getDatabaseConfig("postgres")
+	
+	user     := dbConfig["user"]
+	password := dbConfig["password"]
+	dbname   := dbConfig["db_name"]
+	host     := dbConfig["host"]
+	port     := dbConfig["host"]
 
-// func DbInit() *sql.DB{
-// 	// Открываем соеденение и чекаем на ошибки
-// 	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/test")  // yourusername:yourpassword@/yourdatabase"
-// 	checkErr(err)
+	dbString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, port, user, dbname, password)
 
-// 	// проверяем соедение с БД
-// 	err = db.Ping()
-// 	checkErr(err)
+	db, err := gorm.Open("postgres", dbString)
+	defer db.Close()
+}
 
-// 	return db
-// }
+// MSSQL
+func Mssql() {
+	dbConfig := getDatabaseConfig("postgres")
+	
+	user     := dbConfig["user"]
+	password := dbConfig["password"]
+	dbname   := dbConfig["db_name"]
+	host     := dbConfig["host"]
+	port     := dbConfig["host"]
 
+	dbString := fmt.Sprintf("sqlserver://%s:%s@%s:%s?database=%s", user, password, host, port, dbname)
 
-// func Mongo() {
-// }
-
-// func Sqlite() {
-//   db, err := gorm.Open("sqlite3", "/tmp/gorm.db")
-//   defer db.Close()
-// }
-
-// func Postgres() {
-// 	db, err := gorm.Open("postgres", "host=myhost port=myport user=gorm dbname=gorm password=mypassword")
-// 	defer db.Close()
-// }
-
-// func Mssql() {
-//   db, err = gorm.Open("mssql", "sqlserver://username:password@localhost:1433?database=dbname")
-//   defer db.Close()
-// }
+  db, err = gorm.Open("mssql", "sqlserver://username:password@localhost:1433?database=dbname")
+  defer db.Close()
+}
 
 
-
+/**
+*  Get config.json and parse to map 
+*/
 func getDatabaseConfig(dbName string) map[string]interface{} {
 
 	// Open our jsonFile
@@ -99,4 +112,14 @@ func getDatabaseConfig(dbName string) map[string]interface{} {
 	dbConfig  := databases[dbName].(map[string]interface{})
 
 	return dbConfig
+}
+
+
+/**
+*  Error handler
+*/
+func errorHandler(err error) {
+	color.Red("ERROR ====================> ")
+	fmt.Println(err)
+	color.Red("ERROR ====================> ")
 }
