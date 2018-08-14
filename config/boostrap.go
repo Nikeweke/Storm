@@ -11,10 +11,6 @@ func Bootstrap() {
 	router := Routes()
 
 
-	var userModel models.User
-	userModel.CreateUser() 
-
-
 	/*
 	|--------------------------------------------------------------------------
 	| Up the server

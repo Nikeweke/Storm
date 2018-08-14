@@ -2,24 +2,19 @@ package helpers
 
 import (
 	"github.com/labstack/echo"
-    color "github.com/fatih/color"
-
+  color "github.com/fatih/color"
 	"fmt"
 	"reflect"
-	
 	"io/ioutil"
 	"encoding/json"
 )
 
-type Route struct {
-	Method string `json:"method"`
-	Path   string `json:"path"`
-	Name   string `json:"name"`
-} 
 
-/**
-* Show routes and write into file without superfluos(лишней) data
-*/ 
+/*
+|--------------------------------------------------------------------------
+|  Show routes and write into file without superfluos(лишней) data
+|--------------------------------------------------------------------------
+*/
 func ShowRoutes(router *echo.Echo) {
 
   var routesPaths  []string
@@ -135,7 +130,7 @@ func writeRoutesIntoFile(routes interface{}) {
 }
 
 
-
+// Simple show routes with water
 // func ShowRoutes(router *echo.Echo) {
 //   var green  *color.Color  = color.New(color.FgGreen)   // GET color
 //   var yellow *color.Color  = color.New(color.FgYellow) // POST color

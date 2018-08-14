@@ -64,3 +64,4 @@ go run main.go
 * **go get github.com/robfig/cron** - jobs
 * **go get -u github.com/jinzhu/gorm** - driver for different databases
 * **go get github.com/go-sql-driver/mysql** - mysql driver
+* **go get github.com/jessevdk/go-assets** - transform assets into go files and compile it

@@ -24,5 +24,5 @@ REM go get gopkg.in/mgo.v2
 REM fresh
 go run main.go
 
-REM go build main.go prod
+REM go build main.go
 REM pause

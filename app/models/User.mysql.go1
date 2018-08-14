@@ -4,7 +4,7 @@
 */
 
 /*
-*  Same model will be for sqlite, postgres and mssql, difference only in connection: Mysql(), Sqlite(), Postgres(), Mssql()
+*  Same model will be for sqlite, postgres and mssql, difference only in connection to database
 */
 
 /*
@@ -16,7 +16,10 @@
 */
 package models
 
-import "time" 
+import (
+	"time"
+	"./db/mysql"
+)
 
 type User struct {
 	Id         string
@@ -31,7 +34,7 @@ type User struct {
 *  Get all users
 */
 func (this User) GetAllUsers() []User {
-	db := Mysql()    
+	db := mysql.Connect()      
 	defer db.Close()
 
 	var users []User  // define array of User types
@@ -46,7 +49,7 @@ func (this User) GetAllUsers() []User {
 */
 func (this User) GetUserById(id string) User {
 	var user User
-	Mysql().Where("id = ?", id).First(&user)  
+	mysql.Connect().Where("id = ?", id).First(&user)  
 
 	return user
 }
@@ -56,7 +59,7 @@ func (this User) GetUserById(id string) User {
 *  Create user
 */
 func (this User) CreateUser() {
-	db := Mysql()    
+	db := mysql.Connect()      
 	defer db.Close()
 
 	user := User{Name: "Jinzhu", Email: "meta.ua", Created_at: time.Now()}
@@ -72,8 +75,8 @@ func (this User) CreateUser() {
 *  Delete user
 */
 func (this User) DeleteUser(id string) {
-	// Mysql().Where("name LIKE ?", "%John%").Delete(User{})
-	Mysql().Where("id = ?", id).Delete(User{})
+	// mysql.Connect()  .Where("name LIKE ?", "%John%").Delete(User{})
+	mysql.Connect().Where("id = ?", id).Delete(User{})
 }
 
 
@@ -81,7 +84,7 @@ func (this User) DeleteUser(id string) {
 *  Update user
 */
 func (this User) UpdateUser(id string) {
-	db := Mysql()    
+	db := mysql.Connect()      
 	defer db.Close()
 	
 	var user User

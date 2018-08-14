@@ -1,11 +1,12 @@
 package helpers
 
 import (
-    "html/template"
-    "net/http"
+	"html/template"
+	"net/http"
 	"path"
-	// "fmt"
-    "encoding/json"
+	color "github.com/fatih/color"
+	"encoding/json"
+	"fmt"
 )
 
 
@@ -52,4 +53,16 @@ func Send(message interface{}, res http.ResponseWriter) {
 */
 func Redirect(path string, res http.ResponseWriter, req *http.Request) {
   http.Redirect(res, req, "/", 301)
+}
+
+
+/*
+|--------------------------------------------------------------------------
+|  Error Handler
+|--------------------------------------------------------------------------
+*/
+func ErrorHandler(err error) {
+	color.Red("ERROR ====================> ")
+	fmt.Println(err)
+	color.Red("ERROR ====================> ")
 }

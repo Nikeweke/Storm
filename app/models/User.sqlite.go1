@@ -1,12 +1,5 @@
-package models
-
-import (
-	"time"
-	"fmt"
-)
-
 /*
-* To use sqlite-driver you need install gcc globaly: https://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-5.1.0-3.exe/download
+* To use sqlite.Connect()  -driver you need install gcc globaly: https://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-5.1.0-3.exe/download
 */
 
 /*
@@ -20,6 +13,14 @@ import (
 *	 3) call methods 
 *
 */
+package models
+
+import (
+	"time"
+	"fmt"
+	"./db/sqlite"
+)
+
 
 type User struct {
 	Id         string
@@ -34,7 +35,7 @@ type User struct {
 *  Get all users
 */
 func (this User) GetAllUsers() []User {
-	db := Sqlite()    
+	db := sqlite.Connect()   
 	defer db.Close()
 
 	var users []User  // define array of User types
@@ -51,7 +52,7 @@ func (this User) GetAllUsers() []User {
 */
 func (this User) GetUserById(id string) User {
 	var user User
-	Sqlite().Where("id = ?", id).First(&user)  
+	sqlite.Connect().Where("id = ?", id).First(&user)  
 
 	return user
 }
@@ -61,7 +62,7 @@ func (this User) GetUserById(id string) User {
 *  Create user
 */
 func (this User) CreateUser() {
-	db := Sqlite()    
+	db := sqlite.Connect()  
 	defer db.Close()
 
 	user := User{Name: "Jinzhu", Email: "meta.ua", Created_at: time.Now()}
@@ -77,8 +78,8 @@ func (this User) CreateUser() {
 *  Delete user
 */
 func (this User) DeleteUser(id string) {
-	// Sqlite().Where("name LIKE ?", "%John%").Delete(User{})
-	Sqlite().Where("id = ?", id).Delete(User{})
+	// sqlite.Connect().Where("name LIKE ?", "%John%").Delete(User{})
+	sqlite.Connect().Where("id = ?", id).Delete(User{})
 }
 
 
@@ -86,7 +87,7 @@ func (this User) DeleteUser(id string) {
 *  Update user
 */
 func (this User) UpdateUser(id string) {
-	db := Sqlite()    
+	db := sqlite.Connect()
 	defer db.Close()
 	
 	var user User
