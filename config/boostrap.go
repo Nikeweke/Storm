@@ -11,7 +11,8 @@ func Bootstrap() {
 	router := Routes()
 
 
-	models.Mongo() 
+	var userModel models.User
+	userModel.CreateUser() 
 
 
 	/*

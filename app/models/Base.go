@@ -16,13 +16,13 @@ import (
 )
 
 // MONGO
-func Mongo() *mgo.Session {
+func Mongo() *mgo.Database {
 	dbConfig := getDatabaseConfig("mongodb")
 	dbString := ""
 
 	user     := dbConfig["user"]
 	password := dbConfig["password"]
-	dbname   := dbConfig["db_name"]
+	dbname   := dbConfig["db_name"].(string)
 	port     := dbConfig["port"]
 	host     := dbConfig["host"]
 
@@ -32,11 +32,13 @@ func Mongo() *mgo.Session {
     dbString = fmt.Sprintf("mongodb://%s:%s@%s/%s:%s", user, password, host, dbname, port)
 	}
 	
-	db, err := mgo.Dial(dbString)
+	session, err := mgo.Dial(dbString)
+	// defer session.Close()
 	if err != nil {
     errorHandler(err)
 	}
 
+	db := session.DB(dbname)
 	return db
 }
 
