@@ -21,8 +21,12 @@
          },
          
          "mongodb": {
-           "db_address": "mongodb://admin:12345@localhost:27015"
-         },
+           "port": "27017",
+           "user": "",
+           "password": "",
+           "host": "localhost",
+           "db_name": "mydb"
+          },
          
          "postgres": {
           "host": "localhost",

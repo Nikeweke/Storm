@@ -2,9 +2,6 @@ package config
 
 import "../app/models"
 
-var UserModel models.User
-
-
 func Bootstrap() {
 	/*
 	|--------------------------------------------------------------------------
@@ -12,6 +9,9 @@ func Bootstrap() {
 	|--------------------------------------------------------------------------
 	*/
 	router := Routes()
+
+
+	models.Mongo() 
 
 
 	/*

@@ -19,6 +19,7 @@ REM go get github.com/fatih/color
 REM go get github.com/jinzhu/gorm
 REM go get github.com/jinzhu/gorm/dialects/mysql
 REM go get github.com/jinzhu/gorm/dialects/sqlite
+REM go get gopkg.in/mgo.v2
 
 REM fresh
 go run main.go

@@ -2,11 +2,12 @@ package models
 
 import (
 	color "github.com/fatih/color"
-	// "github.com/jinzhu/gorm"
-	// _ "github.com/jinzhu/gorm/dialects/mysql"
-	// _ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	//  _ "github.com/jinzhu/gorm/dialects/postgres"
 	//  _ "github.com/jinzhu/gorm/dialects/mssql"
+	"gopkg.in/mgo.v2"
 
 	"encoding/json"
 	"fmt"
@@ -15,8 +16,29 @@ import (
 )
 
 // MONGO
-// func Mongo() {
-// }
+func Mongo() *mgo.Session {
+	dbConfig := getDatabaseConfig("mongodb")
+	dbString := ""
+
+	user     := dbConfig["user"]
+	password := dbConfig["password"]
+	dbname   := dbConfig["db_name"]
+	port     := dbConfig["port"]
+	host     := dbConfig["host"]
+
+	if user == "" || password == ""  {
+		dbString = fmt.Sprintf("mongodb://%s/%s:%s", host, dbname, port)
+	} else {
+    dbString = fmt.Sprintf("mongodb://%s:%s@%s/%s:%s", user, password, host, dbname, port)
+	}
+	
+	db, err := mgo.Dial(dbString)
+	if err != nil {
+    errorHandler(err)
+	}
+
+	return db
+}
 
 // MYSQL
 func Mysql() *gorm.DB {
@@ -26,7 +48,6 @@ func Mysql() *gorm.DB {
 	dbname   := dbConfig["db_name"]
 
 	dbString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local", user, password, dbname)
-
 	db, err := gorm.Open("mysql", dbString)
 	if err != nil {
 	  errorHandler(err)
@@ -46,9 +67,8 @@ func Sqlite() *gorm.DB {
   return db 
 }
 
-
 // POSTGRES
-func Postgres() {
+func Postgres() *gorm.DB {
 	dbConfig := getDatabaseConfig("postgres")
 	
 	user     := dbConfig["user"]
@@ -60,12 +80,15 @@ func Postgres() {
 	dbString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, port, user, dbname, password)
 
 	db, err := gorm.Open("postgres", dbString)
-	defer db.Close()
+	if err != nil {
+	  errorHandler(err)
+	}
+  return db 
 }
 
 // MSSQL
-func Mssql() {
-	dbConfig := getDatabaseConfig("postgres")
+func Mssql() *gorm.DB {
+	dbConfig := getDatabaseConfig("mssql")
 	
 	user     := dbConfig["user"]
 	password := dbConfig["password"]
@@ -74,11 +97,12 @@ func Mssql() {
 	port     := dbConfig["host"]
 
 	dbString := fmt.Sprintf("sqlserver://%s:%s@%s:%s?database=%s", user, password, host, port, dbname)
-
-  db, err = gorm.Open("mssql", "sqlserver://username:password@localhost:1433?database=dbname")
-  defer db.Close()
+  db, err := gorm.Open("mssql", dbString)
+	if err != nil {
+	  errorHandler(err)
+	}
+  return db 
 }
-
 
 /**
 *  Get config.json and parse to map 
@@ -113,7 +137,6 @@ func getDatabaseConfig(dbName string) map[string]interface{} {
 
 	return dbConfig
 }
-
 
 /**
 *  Error handler

@@ -6,6 +6,10 @@ import (
 )
 
 /*
+* To use sqlite-driver you need install gcc globaly: https://sourceforge.net/projects/tdm-gcc/files/TDM-GCC%20Installer/tdm-gcc-5.1.0-3.exe/download
+*/
+
+/*
 *  More about methods GORM: http://doc.gorm.io/crud.html#query
 */
 
