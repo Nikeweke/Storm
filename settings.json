@@ -17,7 +17,7 @@
          },
  
          "sqlite": {
-           "db_address": "./test.sqlite"
+           "db_name": "./test.sqlite"
          },
          
          "mongodb": {
