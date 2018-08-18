@@ -8,7 +8,6 @@ package routes
 import (
 	"github.com/labstack/echo"
 	"../app/controllers"
-	// "./middlewares"
 )
 
 var IndexCtrl controllers.IndexController

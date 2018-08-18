@@ -10,7 +10,7 @@ import (
 
 // SQLITE
 func Connect() *gorm.DB {
-	dbConfig := helpers.GetDatabaseConfig("sqlite")
+	dbConfig := helpers.GetDatabaseSettings("sqlite")
 	dbString := dbConfig["db_name"]
 	
 	db, err := gorm.Open("sqlite3", dbString)

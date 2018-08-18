@@ -7,6 +7,9 @@ import (
 	color "github.com/fatih/color"
 	"encoding/json"
 	"fmt"
+
+	// "../../views"
+	// "reflect"
 )
 
 
@@ -18,19 +21,46 @@ import (
 func Render(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
 
-	// head      :=  path.Join("views/partials", "head.html")
-	// foot      :=  path.Join("views/partials", "footer.html")
-	// navbar      :=  path.Join("views/partials", "navbar.html")
+	// head   :=  path.Join("views/partials", "head.html")
+	// foot   :=  path.Join("views/partials", "footer.html")
+	// navbar :=  path.Join("views/partials", "navbar.html")
 
 	// parsedPages := template.Must(template.ParseFiles(head, navbar, path_tmpl, foot))
 	parsedPages :=  template.Must( template.ParseFiles(pagePath) )
-	// if err != nil{ // если ошибка не пусто, показать сообщение в консоли
-	//   fmt.Println(err)
-	// }
 
-	// parsedPages.ExecuteTemplate(res, page, data)
 	return parsedPages.Execute(res, viewArgs) 
 }
+
+
+
+/*
+|--------------------------------------------------------------------------
+|  Render page
+|--------------------------------------------------------------------------
+*/
+// func Render(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
+// 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
+
+// 	// head      :=  path.Join("views/partials", "head.html")
+// 	// foot      :=  path.Join("views/partials", "footer.html")
+// 	// navbar      :=  path.Join("views/partials", "navbar.html")
+
+// 	// parsedPages := template.Must(template.ParseFiles(head, navbar, path_tmpl, foot))
+// 	parsedPages :=  template.Must( template.ParseFiles(pagePath) )
+
+// 	// fmt.Println(reflect.TypeOf(views.Assets)) // *assets.FileSystem
+// 	// fmt.Println(reflect.TypeOf(parsedPages)) // *template.Template
+// 	// fmt.Println(pagePath) // string 
+
+// 	file, _ := views.Assets.Open("/views/home.html") // *assets.File
+// 	fmt.Println(string(file.Data[:]))
+
+// 	// c.HTML(http.StatusOK, "<strong>Hello, World!</strong>")
+  
+// 	return parsedPages.Execute(res, viewArgs) 
+// 	// return parsedPages.ExecuteTemplate(res, page, data)
+// }
+
 
 
 

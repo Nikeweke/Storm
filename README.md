@@ -9,7 +9,7 @@ Fast and reliable app to make problem runs. Using `echo` framework for HTTP hand
 * Quick start
 * Commands
 * Schema of launch
-* Useful packages
+* Packages you may need
 
 ---
 
@@ -57,12 +57,14 @@ go run main.go
 </p>
 
 
-### Useful packages
+### Packages you may need
+in `packages.bat` you can find ready commands
+
+* **go get -u github.com/gin-gonic/gin** - `echo` like http framework
 * **go get github.com/pilu/fresh** - watcher за кодом
 * **go get github.com/fatih/color** - цвета для консоли 
-* **go get -u github.com/gin-gonic/gin** - `echo` like http framework
 * **go get github.com/gorilla/websocket** - sockets
 * **go get github.com/robfig/cron** - jobs
 * **go get -u github.com/jinzhu/gorm** - driver for different databases
 * **go get github.com/go-sql-driver/mysql** - mysql driver
-* **go get github.com/jessevdk/go-assets** - transform assets into go files and compile it
+* **https://github.com/gin-gonic/gin/tree/master/examples/assets-in-binary** - transform assets into go files and compile it

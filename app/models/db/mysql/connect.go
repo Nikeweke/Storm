@@ -9,7 +9,7 @@ import (
 
 // MYSQL
 func Connect() *gorm.DB {
-	dbConfig := helpers.GetDatabaseConfig("mysql")
+	dbConfig := helpers.GetDatabaseSettings("mysql")
 	user     := dbConfig["user"]
 	password := dbConfig["password"]
 	dbname   := dbConfig["db_name"]

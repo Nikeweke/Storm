@@ -10,7 +10,7 @@ import (
 
 // MSSQL
 func Connect() *gorm.DB {
-	dbConfig := helpers.GetDatabaseConfig("mssql")
+	dbConfig := helpers.GetDatabaseSettings("mssql")
 	
 	user     := dbConfig["user"]
 	password := dbConfig["password"]

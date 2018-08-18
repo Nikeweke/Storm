@@ -10,7 +10,7 @@ var DB_NAME = ""
 
 // MONGO
 func Connect() (*mgo.Session, string) {
-	dbConfig := helpers.GetDatabaseConfig("mongodb")
+	dbConfig := helpers.GetDatabaseSettings("mongodb")
 	dbString := ""
 
 	user     := dbConfig["user"]

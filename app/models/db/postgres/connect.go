@@ -10,7 +10,7 @@ import (
 
 // POSTGRES
 func Connect() *gorm.DB {
-	dbConfig := helpers.GetDatabaseConfig("postgres")
+	dbConfig := helpers.GetDatabaseSettings("postgres")
 	
 	user     := dbConfig["user"]
 	password := dbConfig["password"]
