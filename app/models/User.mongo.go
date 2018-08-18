@@ -6,8 +6,8 @@
 /*
 *  How to use in controllers:
 *	 1) import "../models"
-*	 2) var UserModel models.User - define model variable
-*	 3) call methods 
+*	 2) define model variable -  var UserModel models.User 
+*	 3) call methods          -  users := UserModel.GetAllUsers()
 */
 package models
 
@@ -27,10 +27,11 @@ type User struct {
 *  Get all users
 */
 func (this User) GetAllUsers() []User {
-	db := mongo.Connect()    
-
+  mongoSession, DB_NAME := mongo.Connect()
+	defer mongoSession.Close()
+	
 	var users []User  // define array of User types
-	userCollection := db.C("users")
+	userCollection := mongoSession.DB(DB_NAME).C("users")
 
 	// get one item
 	err := userCollection.Find(bson.M{}).All(&users)
@@ -38,8 +39,6 @@ func (this User) GetAllUsers() []User {
 		fmt.Println(err)
 	}
 
-	fmt.Println(users)
-	
 	return users
 }
 
@@ -48,10 +47,11 @@ func (this User) GetAllUsers() []User {
 *  Get user by Id
 */
 func (this User) GetUserById(id string) User {
-	db := mongo.Connect()     
+	mongoSession, DB_NAME := mongo.Connect()
+	defer mongoSession.Close()   
   
 	var user User 
-	userCollection := db.C("users")
+	userCollection := mongoSession.DB(DB_NAME).C("users")
 
 	// get one item
 	err := userCollection.Find(bson.M{"_id": id}).One(&user)
@@ -67,9 +67,10 @@ func (this User) GetUserById(id string) User {
 *  Create user
 */
 func (this User) CreateUser() {
-	db := mongo.Connect()    
+	mongoSession, DB_NAME := mongo.Connect()
+	defer mongoSession.Close()   
 
-	userCollection := db.C("users")
+	userCollection := mongoSession.DB(DB_NAME).C("users")
 	user           := User{Email: "gmail.com", Password: "2233221"} 
 
 	err := userCollection.Insert(user)
@@ -83,8 +84,10 @@ func (this User) CreateUser() {
 *  Delete user
 */
 func (this User) DeleteUser(id string) {
-	db := mongo.Connect()  
-	userCollection := db.C("users")
+	mongoSession, DB_NAME := mongo.Connect()
+	defer mongoSession.Close()  
+
+	userCollection := mongoSession.DB(DB_NAME).C("users")
 
 	err := userCollection.Remove(bson.M{"_id": id})
 	if err != nil {
@@ -97,8 +100,10 @@ func (this User) DeleteUser(id string) {
 *  Update user
 */
 func (this User) UpdateUser(id string) {
-	db := mongo.Connect()  
-	userCollection := db.C("users") 
+	mongoSession, DB_NAME := mongo.Connect()
+	defer mongoSession.Close()  
+
+	userCollection := mongoSession.DB(DB_NAME).C("users") 
 	
 	err := userCollection.Update(bson.M{"_id": id}, bson.M{"$set": bson.M{"email": "new Name"}})
 	if err != nil {

@@ -16,6 +16,7 @@ var ApiCtrl controllers.ApiController
 
 // api/...
 func Api(router *echo.Echo) {
+	
 	api := router.Group("/api")
 
 	// # Using middleware for this group (custom)
@@ -30,4 +31,5 @@ func Api(router *echo.Echo) {
 	}))
 
 	api.Any("", ApiCtrl.CheckApi)   
+
 }

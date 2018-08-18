@@ -9,8 +9,8 @@
 /*
 *  How to use in controllers:
 *	 1) import "../models"
-*	 2) var UserModel models.User - define model variable
-*	 3) call methods 
+*	 2) define model variable -  var UserModel models.User 
+*	 3) call methods          -  UserModel.GetAllUsers()
 *
 */
 package models

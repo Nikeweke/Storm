@@ -4,13 +4,12 @@ import (
 	"net/http"
 	"github.com/labstack/echo"
 	"../helpers"
-);
+)
 
 type IndexController struct {}
 
-
 /**
-* Index - Home page
+* Home page
 */
 func (this IndexController) Index(c echo.Context) error {
 	type StringArray helpers.StringArray

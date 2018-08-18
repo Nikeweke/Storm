@@ -6,8 +6,10 @@ import (
 	"fmt"
 )
 
+var DB_NAME = ""
+
 // MONGO
-func Connect() *mgo.Database {
+func Connect() (*mgo.Session, string) {
 	dbConfig := helpers.GetDatabaseConfig("mongodb")
 	dbString := ""
 
@@ -23,12 +25,12 @@ func Connect() *mgo.Database {
     dbString = fmt.Sprintf("mongodb://%s:%s@%s/%s:%s", user, password, host, dbname, port)
 	}
 	
-	session, err := mgo.Dial(dbString)
-	// defer session.Close()
+	sessionDB, err := mgo.Dial(dbString)
 	if err != nil {
-	  helpers.ErrorHandler(err)
+		helpers.ErrorHandler(err)
 	}
+	
+  DB_NAME = dbname 
 
-	db := session.DB(dbname)
-	return db
+	return sessionDB, DB_NAME
 }

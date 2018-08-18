@@ -15,7 +15,7 @@ import (
 |  Show routes and write into file without superfluos(лишней) data
 |--------------------------------------------------------------------------
 */
-func ShowRoutes(router *echo.Echo) {
+func ShowRoutes(router *echo.Echo, isWriteIntoFile bool) {
 
   var routesPaths  []string
   var routes       []*echo.Route = router.Routes()
@@ -54,7 +54,9 @@ func ShowRoutes(router *echo.Echo) {
   }
 
   // make file routes.json 
-  writeRoutesIntoFile(outputRoutes)
+  if isWriteIntoFile == true { 
+    writeRoutesIntoFile(outputRoutes)
+  } 
 
   // output routes in console
   for _, route := range outputRoutes {

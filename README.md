@@ -45,10 +45,11 @@ go run main.go
 ```
 
 ### Commands
-* **main dev** - start `dev` mode - 8000 port
-* **main prod** - start `prod` mode - 80 port
-* **main test** - start `test` mode - 3000 port
-* **main routes** - output in console registered routes
+* **main.exe dev** - start `dev` mode - 8000 port
+* **main.exe prod** - start `prod` mode - 80 port
+* **main.exe test** - start `test` mode - 3000 port
+* **main.exe routes** - output in console registered routes
+* **main.exe routes -w** - output routes and write into file
 
 ### Schema of launch
 <p align="center" style="text-align:center;">

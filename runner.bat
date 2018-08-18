@@ -22,7 +22,7 @@ REM go get github.com/jinzhu/gorm/dialects/sqlite
 REM go get gopkg.in/mgo.v2
 
 REM fresh
-go run main.go
+go run main.go 
 
 REM go build main.go
 REM pause
