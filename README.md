@@ -8,6 +8,7 @@ Fast and reliable app to make problem runs
 #### Содержание 
 * Quick start
 * Settings.json
+* What is optional?
 * Commands
 * Schema of launch
 * Packages you may need
@@ -22,6 +23,14 @@ Secondly - execute `runner`.
 
 ### Settings.json
 In `settings.json` you can describe your database connections, sockets, jobs and turn off/on it. **Always keep this file with binary file, in other case it will break down** 
+
+
+### What is optional?
+* runner.bat
+* runner_linux.bat
+* packages.bat
+* packages_linux.bat
+* test.sqlite - its database just for testing `gorm`
 
 ### Commands
 * **main.exe dev** - start `dev` mode - 8000 port
