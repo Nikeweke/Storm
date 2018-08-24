@@ -7,61 +7,95 @@ import (
 	color "github.com/fatih/color"
 	"encoding/json"
 	"fmt"
-
-	// "../../views"
-	// "reflect"
+	"../../views"
+	"reflect"
+	"strings"
+	"io/ioutil"
 )
 
 
 /*
 |--------------------------------------------------------------------------
-|  Render page
+|  Render view
 |--------------------------------------------------------------------------
 */
 func Render(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
-	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
+	// указываем путь к вьюхе
+	pagePath :=  path.Join("views", page +".html")
 
+	// вот так можно объеденить несколько кусков
 	// head   :=  path.Join("views/partials", "head.html")
 	// foot   :=  path.Join("views/partials", "footer.html")
 	// navbar :=  path.Join("views/partials", "navbar.html")
-
 	// parsedPages := template.Must(template.ParseFiles(head, navbar, path_tmpl, foot))
-	parsedPages :=  template.Must( template.ParseFiles(pagePath) )
 
+	parsedPages :=  template.Must( template.ParseFiles(pagePath) )
 	return parsedPages.Execute(res, viewArgs) 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+|  Render view from compiled assets (go-assets-builder)
+|  Be sure you gather your views via go-assets-builder
+|--------------------------------------------------------------------------
+*/
+func RenderCompiled(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
+	pagePath :=  path.Join("/", "views", page +".html")
+
+	t, err := LoadTemplate(pagePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return t.Execute(res, viewArgs)
 }
 
 
 
 /*
 |--------------------------------------------------------------------------
-|  Render page
+|  Find file by name and output template for execution (go-assets-builder)
 |--------------------------------------------------------------------------
 */
-// func Render(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
-// 	pagePath :=  path.Join("views", page +".html")   // указываем путь к вьюхам(темплейтам)
+func LoadTemplate(viewName string) (*template.Template, error) {
+  var extension string     = ".html"
+	var t *template.Template = template.New("")
 
-// 	// head      :=  path.Join("views/partials", "head.html")
-// 	// foot      :=  path.Join("views/partials", "footer.html")
-// 	// navbar      :=  path.Join("views/partials", "navbar.html")
+	for name, file := range views.Assets.Files {
 
-// 	// parsedPages := template.Must(template.ParseFiles(head, navbar, path_tmpl, foot))
-// 	parsedPages :=  template.Must( template.ParseFiles(pagePath) )
+		// проверяем директория ли это или есть ли у файла расширение(окончание) .html 
+		if file.IsDir() || !strings.HasSuffix(name, extension) {
+			continue
+		}
 
-// 	// fmt.Println(reflect.TypeOf(views.Assets)) // *assets.FileSystem
-// 	// fmt.Println(reflect.TypeOf(parsedPages)) // *template.Template
-// 	// fmt.Println(pagePath) // string 
+		if name == viewName {
+			// вычитываем файл 		
+			h, err := ioutil.ReadAll(file) // gives type - []uint8
+			if err != nil {
+				return nil, err
+			}
 
-// 	file, _ := views.Assets.Open("/views/home.html") // *assets.File
-// 	fmt.Println(string(file.Data[:]))
+			t, err = t.New(name).Parse(string(h))
+			if err != nil {
+				return nil, err
+			}
+			break
+		}
+	}
 
-// 	// c.HTML(http.StatusOK, "<strong>Hello, World!</strong>")
-  
-// 	return parsedPages.Execute(res, viewArgs) 
-// 	// return parsedPages.ExecuteTemplate(res, page, data)
-// }
+	return t, nil
+}
 
 
+/*
+|--------------------------------------------------------------------------
+|  Typeof and output
+|--------------------------------------------------------------------------
+*/
+func Typeof(value interface{}) {
+	fmt.Println(reflect.TypeOf(value))
+}
 
 
 /*
