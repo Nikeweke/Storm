@@ -12,6 +12,7 @@ Fast and reliable app to make problem runs
 * Schema of launch
 * Packages you may need
 * Pack all views into one binary file (go-assets)
+* [My Sockets examples](https://github.com/Nikeweke/GOLANG-WS)
 
 ---
 
