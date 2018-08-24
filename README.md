@@ -58,17 +58,17 @@ Execute command for a bundle
 ```bash
 # target folder is "views" where placed all views,
 # and output file is views.go
-go-assets-builder views -o views/views.go
+go-assets-builder views -o app/helpers/views.go
 ```
 
-Go to `views/views.go` and change package name
+Go to `./app/helpers/views.go` and change package name
 ```go 
 package main 
 // to 
-package views
+package helpers
 ```
 
-You can take look at file `views/views.go`. There you can find filenames and bytes of views. And you can use it like:
+You can take look at file `./app/helpers/views.go`. There you can find filenames and bytes of views. And you can use it like:
 ```go
 // Example for possible controller
 import (
