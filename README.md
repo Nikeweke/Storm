@@ -118,5 +118,5 @@ func (this someController) someMethod(c echo.Context) error {
 }
 ```
 
-If dont get how it works. You can to `./app/helpers/base.go`. Find **RenderCompiled** and **LoadTemplate**. 
+If you dont get how it works. You can go to `./app/helpers/base.go`. Find **RenderCompiled** and **LoadTemplate**. 
 In LoadTemplate you can output files that was bundled by commenting `break` in for and set `Println(name)` 
