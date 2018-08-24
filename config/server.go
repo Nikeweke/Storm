@@ -84,7 +84,7 @@ func outLaunchInfo(mode Mode) {
 	c.Print(mode.Port + " ")
 	fmt.Print("(");
 	c.Print(mode.Name + " ") 
-	fmt.Print("mode)" + "[" + current_time + "]")
+	fmt.Print("mode)" + "[" + current_time + "] \n")
 }
 
 

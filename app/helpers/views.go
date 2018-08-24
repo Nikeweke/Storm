@@ -2,7 +2,6 @@ package helpers
 
 import (
 	"time"
-
 	"github.com/jessevdk/go-assets"
 )
 
@@ -13,16 +12,16 @@ var Assets = assets.NewFileSystem(map[string][]string{"/": []string{"views"}, "/
 	"/": &assets.File{
 		Path:     "/",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1535107042, 1535107042496979400),
+		Mtime:    time.Unix(1535110604, 1535110604520405500),
 		Data:     nil,
 	}, "/views": &assets.File{
 		Path:     "/views",
 		FileMode: 0x800001ff,
-		Mtime:    time.Unix(1535106899, 1535106899024578300),
+		Mtime:    time.Unix(1535108749, 1535108749078069600),
 		Data:     nil,
 	}, "/views/home.html": &assets.File{
 		Path:     "/views/home.html",
 		FileMode: 0x1b6,
-		Mtime:    time.Unix(1535105674, 1535105674671461000),
+		Mtime:    time.Unix(1533843856, 1533843856495835700),
 		Data:     []byte(_Assets80c0d7c4b5f47513d79ddc23ee8b0f4488cb1b9b),
 	}}, "")

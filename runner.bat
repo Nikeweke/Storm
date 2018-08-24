@@ -13,6 +13,6 @@ REM SET CGO_ENABLED=0
 REM go-assets-builder views -o app/helpers/views.go
 REM fresh
 
-go run main.go 
-REM go build main.go
+REM go run main.go 
+go build main.go
 REM pause

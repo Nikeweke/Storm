@@ -42,8 +42,6 @@ func GetSettings(name string) interface{} {
 */
 func parseSettingsFile(filename string) StringArray {
 
- 
-
 	// Open our jsonFile
 	jsonFile, err := os.Open(filename)
 	// if we os.Open returns an error then handle it

@@ -12,6 +12,8 @@ import (
 	"io/ioutil"
 )
 
+var CompiledAssets map[string]*template.Template
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,50 +42,48 @@ func Render(page string, viewArgs map[string]interface{}, res http.ResponseWrite
 |--------------------------------------------------------------------------
 */
 func RenderCompiled(page string, viewArgs map[string]interface{}, res http.ResponseWriter) error {
+	// fill in Compiled Assets with parsed templates
+  if len(CompiledAssets) == 0 {
+	  fillCompiledAssets()
+  } 
+
 	pagePath :=  path.Join("/", "views", page +".html")
+	view     := CompiledAssets[pagePath]
 
-	t, err := LoadTemplate(pagePath)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return t.Execute(res, viewArgs)
+	return view.Execute(res, viewArgs)
 }
 
 
 
 /*
 |--------------------------------------------------------------------------
-|  Find file by name and output template for execution (go-assets-builder)
+|  Find file by name and fill array with templates that was parsed by assets file (views.go)
 |--------------------------------------------------------------------------
 */
-func LoadTemplate(viewName string) (*template.Template, error) {
+func fillCompiledAssets() {
   var extension string     = ".html"
 	var t *template.Template = template.New("")
+	CompiledAssets = make(map[string]*template.Template)
 
 	for name, file := range Assets.Files {
-
 		// проверяем директория ли это или есть ли у файла расширение(окончание) .html 
 		if file.IsDir() || !strings.HasSuffix(name, extension) {
 			continue
 		}
 
-		if name == viewName {
-			// вычитываем файл 		
-			h, err := ioutil.ReadAll(file) // gives type - []uint8
-			if err != nil {
-				return nil, err
-			}
-
-			t, err = t.New(name).Parse(string(h))
-			if err != nil {
-				return nil, err
-			}
-			break
+		// вычитываем файл 		
+		h, err := ioutil.ReadAll(file) // gives type - []uint8
+		if err != nil {
+			fmt.Println(err)
 		}
-	}
 
-	return t, nil
+		t, err = t.New(name).Parse(string(h))
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		CompiledAssets[name] = t
+	}
 }
 
 
