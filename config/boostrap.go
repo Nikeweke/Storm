@@ -12,10 +12,13 @@ func Bootstrap() {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Jobs
+	| Jobs 
 	|--------------------------------------------------------------------------
+	| to see how it works:
+	|   * rename "jobs.go.example" to "jobs.go", and uncomment function below)
+	|   * install jobs - go get github.com/robfig/cron
 	*/
-	Jobs()
+  // Jobs()
 
 
 	/*

@@ -14,10 +14,6 @@ import (
 )
 
 func Jobs() {
-	if helpers.GetSettings("jobs").(bool) == false {
-		return
-	}
-
 	color.New(color.FgCyan).Add(color.Bold).Print("Jobs")
 	color.New(color.FgGreen).Add(color.Bold).Print(" are enabled \n")
 

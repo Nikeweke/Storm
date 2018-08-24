@@ -17,43 +17,8 @@ Fast and reliable app to make problem runs
 ---
 
 ### Quick start
-Just copy and execute file. At second launch comment packages `go get ...` downloading.
-###### windows (runner.bat)
-```bat
-@ECHO OFF
-SETLOCAL
-chcp 866>nul
-
-SET GOPATH=%CD%
-SET PATH=%PATH%;%GOPATH%\BIN;
-
-REM Linux Build settings
-REM SET GOOS=linux
-REM SET GOARCH=amd64
-REM SET CGO_ENABLED=0
-
-go get -u github.com/labstack/echo
-
-REM go-assets-builder views -o views/views.go
-REM fresh
-
-go run main.go 
-REM go build main.go
-REM pause
-```
-
-###### linux (runner.sh)
-```bash
-export GOPATH=$(pwd)
-export PATH=$PATH:$GOPATH/bin
-
-go get -u github.com/labstack/echo
-
-# go-assets-builder views -o views/views.go
-# fresh
-
-go run main.go
-```
+Firstly run `packages` to install all packages for first launch.                                      
+Secondly - execute `runner`.
 
 ### Settings.json
 In `settings.json` you can describe your database connections, sockets, jobs and turn off/on it. **Always keep this file with binary file, in other case it will break down** 

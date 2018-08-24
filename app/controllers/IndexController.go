@@ -34,7 +34,9 @@ func (this IndexController) Index(c echo.Context) error {
 		 "items2": itemsNested,
 	}	
 
-  return helpers.RenderCompiled("home", viewArgs, c.Response())
+	return helpers.Render("home", viewArgs, c.Response()) 
+	// OR 
+	// return helpers.RenderCompiled("home", viewArgs, c.Response())
 }
 
 /**

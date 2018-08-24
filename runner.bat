@@ -10,9 +10,7 @@ REM SET GOOS=linux
 REM SET GOARCH=amd64
 REM SET CGO_ENABLED=0
 
-REM go get -u github.com/labstack/echo
-
-REM go-assets-builder views -o views/views.go
+REM go-assets-builder views -o app/helpers/views.go
 REM fresh
 
 go run main.go 

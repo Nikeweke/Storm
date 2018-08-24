@@ -7,7 +7,6 @@ import (
 	color "github.com/fatih/color"
 	"encoding/json"
 	"fmt"
-	"../../views"
 	"reflect"
 	"strings"
 	"io/ioutil"
@@ -62,7 +61,7 @@ func LoadTemplate(viewName string) (*template.Template, error) {
   var extension string     = ".html"
 	var t *template.Template = template.New("")
 
-	for name, file := range views.Assets.Files {
+	for name, file := range Assets.Files {
 
 		// проверяем директория ли это или есть ли у файла расширение(окончание) .html 
 		if file.IsDir() || !strings.HasSuffix(name, extension) {
