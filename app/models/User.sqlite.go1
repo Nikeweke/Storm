@@ -11,7 +11,13 @@
 *	 1) import "../models"
 *	 2) define model variable -  var UserModel models.User 
 *	 3) call methods          -  UserModel.GetAllUsers()
-*
+*/
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++
+* ACHTUNG 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  Make name of fields in database only in lowercase and thru underline if needed,
+	Make name of tables lowercase, in other case GORM can work not PROPERLY!
 */
 package models
 

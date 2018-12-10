@@ -5,3 +5,4 @@ export PATH=$PATH:$GOPATH/bin
 # fresh
 
 go run main.go
+# go build main.go
