@@ -18,7 +18,7 @@ Fast and reliable app to make problem runs
 ---
 
 ### Quick start
-Firstly run `packages` to install all packages for first launch.                                      
+Firstly - run `packages` to install all packages for first launch.                                      
 Secondly - execute `runner`.
 
 ### Settings.json
