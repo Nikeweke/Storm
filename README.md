@@ -18,8 +18,13 @@ Fast and reliable app to make problem runs
 ---
 
 ### Quick start
-Firstly - run `packages` to install all packages for first launch.                                      
-Secondly - execute `runner`.
+```bash
+# install packages
+.\packages.bat
+
+# run it
+.\runner.bat
+```
 
 ### Settings.json
 In `settings.json` you can describe your database connections, sockets, jobs and turn off/on it. **Always keep this file with binary file, in other case it will break down** 
